@@ -217,7 +217,7 @@ for platform in ${TEST_PLATFORMS//;/ }; do
     -debugCodeOptimization \
     -coverageOptions "$COVERAGE_OPTIONS" \
     $CUSTOM_PARAMETERS
-  EOF
+EOF
 
   xvfb-run -a -e /dev/stdout --server-args="-screen 0 1920x1280x24" unity-editor \
     -batchmode \
