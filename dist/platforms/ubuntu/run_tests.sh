@@ -195,7 +195,7 @@ for platform in ${TEST_PLATFORMS//;/ }; do
   else
     echo ""
     echo "###########################"
-    echo "#   Testing in $platform  #"
+    echo "# Testing in $platform GPU#"
     echo "###########################"
     echo ""
 
@@ -205,6 +205,19 @@ for platform in ${TEST_PLATFORMS//;/ }; do
       runTests="-quit"
     fi
   fi
+
+  cat << EOF
+  xvfb-run -a -e /dev/stdout --server-args="-screen 0 1920x1280x24" unity-editor \
+    -batchmode \
+    -logFile "$FULL_ARTIFACTS_PATH/$platform.log" \
+    -projectPath "$UNITY_PROJECT_PATH" \
+    -coverageResultsPath "$FULL_COVERAGE_RESULTS_PATH" \
+    $runTests \
+    -enableCodeCoverage \
+    -debugCodeOptimization \
+    -coverageOptions "$COVERAGE_OPTIONS" \
+    $CUSTOM_PARAMETERS
+  EOF
 
   xvfb-run -a -e /dev/stdout --server-args="-screen 0 1920x1280x24" unity-editor \
     -batchmode \
