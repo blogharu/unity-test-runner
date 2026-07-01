@@ -206,6 +206,8 @@ for platform in ${TEST_PLATFORMS//;/ }; do
     fi
   fi
 
+  nvidia-smi
+
   cat << EOF
   xvfb-run -a -e /dev/stdout --server-args="-screen 0 1920x1280x24" unity-editor \
     -batchmode \
@@ -228,6 +230,7 @@ EOF
     -enableCodeCoverage \
     -debugCodeOptimization \
     -coverageOptions "$COVERAGE_OPTIONS" \
+    -force-vulkan \
     $CUSTOM_PARAMETERS
 
   # Catch exit code
