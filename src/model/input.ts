@@ -130,6 +130,8 @@ class Input {
     const containerRegistryRepository = getInput('containerRegistryRepository') || 'unityci/editor';
     const containerRegistryImageVersion = getInput('containerRegistryImageVersion') || '3';
 
+    const gpus = getInput('gpus') || 'false';
+
     // Validate input
     if (!this.testModes.includes(testMode)) {
       throw new Error(`Invalid testMode ${testMode}`);
@@ -245,6 +247,7 @@ class Input {
       containerRegistryRepository,
       containerRegistryImageVersion,
       unitySerial,
+      gpus,
     };
   }
 }

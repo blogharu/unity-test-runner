@@ -1,6 +1,6 @@
-name: 'Unity - Test runner'
+name: 'Unity - Test runner with gpus'
 author: Webber Takken <webber@takken.io>
-description: 'Run tests for any Unity project.'
+description: 'Run tests for any Unity project with gpus.'
 inputs:
   unityVersion:
     required: false
@@ -104,6 +104,11 @@ inputs:
     description:
       'Whether to run as a user that matches the host system or the default root container user. Only applicable to
       Linux hosts and containers. This is useful for fixing permission errors on Self-Hosted runners.'
+  gpus:
+    required: false
+    default: 'false'
+    description:
+      'Whether to assign nvidia gpu or not.'
 outputs:
   artifactsPath:
     description: 'Path where the artifacts are stored.'

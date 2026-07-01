@@ -33,6 +33,7 @@ export async function run() {
       containerRegistryRepository,
       containerRegistryImageVersion,
       unitySerial,
+      gpus,
     } = Input.getFromUser();
     const baseImage = new ImageTag({
       editorVersion,
@@ -68,6 +69,7 @@ export async function run() {
         unityLicensingServer,
         runAsHostUser,
         unitySerial,
+        gpus,
         ...runnerContext,
       });
     } finally {

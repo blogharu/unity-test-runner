@@ -63,6 +63,7 @@ const Docker = {
       runnerTemporaryPath,
       dockerCpuLimit,
       dockerMemoryLimit,
+      gpus,
     } = parameters;
 
     const githubHome = path.join(runnerTemporaryPath, '_github_home');
@@ -98,6 +99,7 @@ const Docker = {
                 ? `--volume /home/runner/.ssh/known_hosts:/root/.ssh/known_hosts:ro`
                 : ''
             } \
+            ${gpus === 'false' ? '' : `--gpus ${gpus}`} \
             ${
               sshPublicKeysDirectoryPath
                 ? `--volume ${sshPublicKeysDirectoryPath}:/root/.ssh:ro`

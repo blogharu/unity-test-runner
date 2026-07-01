@@ -206,7 +206,7 @@ for platform in ${TEST_PLATFORMS//;/ }; do
     fi
   fi
 
-  unity-editor \
+  xvfb-run -a -e /dev/stdout --server-args="-screen 0 1920x1280x24" unity-editor \
     -batchmode \
     -logFile "$FULL_ARTIFACTS_PATH/$platform.log" \
     -projectPath "$UNITY_PROJECT_PATH" \
