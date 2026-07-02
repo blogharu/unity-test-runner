@@ -11,3 +11,4 @@ lib/
 !.yarn/sdks
 !.yarn/versions
 .pnp.*
+image/*
