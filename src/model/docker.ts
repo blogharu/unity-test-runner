@@ -112,9 +112,7 @@ const Docker = {
             --ipc=host \
             --ulimit nofile=65535:65535 \
             --ulimit stack=67108864 \
-
             ${image} \
-
             /bin/bash -c "/steps/entrypoint.sh`;
   },
 
