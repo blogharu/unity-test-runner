@@ -200,7 +200,8 @@ for platform in ${TEST_PLATFORMS//;/ }; do
     echo ""
 
     if [[ "$platform" != "COMBINE_RESULTS" ]]; then
-      runTests="-runTests -testPlatform $platform -testResults $FULL_ARTIFACTS_PATH/$platform-results.xml"
+      runTests="-runTests -testPlatform editmode -testResults $FULL_ARTIFACTS_PATH/$platform-results.xml"
+      # runTests="-runTests -testPlatform $platform -testResults $FULL_ARTIFACTS_PATH/$platform-results.xml"
     else
       runTests="-quit"
     fi
