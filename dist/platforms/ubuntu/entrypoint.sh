@@ -23,9 +23,22 @@ if [[ "$RUN_AS_HOST_USER" == "true" ]]; then
   groupadd -g $GROUPID $GROUPNAME
   useradd -u $USERID -g $GROUPID $USERNAME
   usermod -aG $GROUPNAME $USERNAME
-  mkdir -p "/home/$USERNAME"
-  chown $USERNAME:$GROUPNAME "/home/$USERNAME"
 
+  if getent group render > /dev/null; then
+    echo "Assign render group to $USERNAME"
+    usermod -aG render $USERNAME
+  fi
+  
+  if getent group video > /dev/null; then
+    echo "Assign video group to $USERNAME"
+    usermod -aG video $USERNAME
+  fi
+
+  mkdir -p "/home/$USERNAME"
+  mkdir -p "/home/$USERNAME/.config/unity3d/Unity"
+  mkdir -p "/home/$USERNAME/.local/share/unity3d"
+  chown -R $USERNAME:$GROUPNAME "/home/$USERNAME"
+  
   # Normally need root permissions to access when using su
   chmod 777 /dev/stdout
   chmod 777 /dev/stderr

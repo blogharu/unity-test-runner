@@ -207,23 +207,7 @@ for platform in ${TEST_PLATFORMS//;/ }; do
     fi
   fi
 
-  nvidia-smi
-
-  cat << EOF
-  xvfb-run -a -e /dev/stdout --server-args="-screen 0 1920x1280x24" unity-editor \
-    -batchmode \
-    -logFile "$FULL_ARTIFACTS_PATH/$platform.log" \
-    -projectPath "$UNITY_PROJECT_PATH" \
-    -coverageResultsPath "$FULL_COVERAGE_RESULTS_PATH" \
-    $runTests \
-    -enableCodeCoverage \
-    -debugCodeOptimization \
-    -coverageOptions "$COVERAGE_OPTIONS" \
-    $CUSTOM_PARAMETERS
-EOF
-
-  xvfb-run -a -e /dev/stdout --server-args="-screen 0 1920x1280x24" unity-editor \
-    -batchmode \
+  xvfb-run -a -e /dev/stdout --server-args="-screen 0 1920x1280x24" /opt/unity/Editor/Unity \
     -logFile "$FULL_ARTIFACTS_PATH/$platform.log" \
     -projectPath "$UNITY_PROJECT_PATH" \
     -coverageResultsPath "$FULL_COVERAGE_RESULTS_PATH" \

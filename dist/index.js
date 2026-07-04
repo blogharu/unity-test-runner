@@ -238,7 +238,7 @@ const Docker = {
             --volume "${actionFolder}/platforms/ubuntu:/steps:z" \
             --volume "${actionFolder}/unity-config:/usr/share/unity3d/config/:z" \
             --volume "${actionFolder}/BlankProject":"/BlankProject:z" \
-            --volume "${actionFolder}/unity3d":"/root/.config/unity3d/OptiTrack/OptiSynth-Pipeline" \
+            --volume "${actionFolder}/cache":"/home/UNKNOWN/.config/unity3d/OptiTrack/OptiSynth-Pipeline:z" \
             --cpus=${dockerCpuLimit} \
             --memory=${dockerMemoryLimit} \
             ${sshAgent ? `--volume ${sshAgent}:/ssh-agent` : ''} \
