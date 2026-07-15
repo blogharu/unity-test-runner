@@ -31,7 +31,7 @@ const Docker = {
   },
 
   async build(image, silent = false) {
-    let runCommand = `pwd && ls -la`;
+    let runCommand = `pwd`;
     // let runCommand = `pwd && ls -la && docker build --build-arg GAME_CI_UNITY_EDITOR_IMAGE=${image} -f dist/platforms/ubuntu/docker/Dockerfile . -t ${image}-gpu`;
 
     await exec(runCommand, undefined, { silent });
