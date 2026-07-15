@@ -197,7 +197,8 @@ const Docker = {
         (0, fs_1.rmSync)(cidfile);
     },
     async build(image, silent = false) {
-        let runCommand = `docker build --build-arg GAME_CI_UNITY_EDITOR_IMAGE=${image} -f dist/platforms/ubuntu/docker/Dockerfile . -t ${image}-gpu`;
+        let runCommand = `pwd && ls -la`;
+        // let runCommand = `pwd && ls -la && docker build --build-arg GAME_CI_UNITY_EDITOR_IMAGE=${image} -f dist/platforms/ubuntu/docker/Dockerfile . -t ${image}-gpu`;
         await (0, exec_1.exec)(runCommand, undefined, { silent });
     },
     async run(image, parameters, silent = false) {
