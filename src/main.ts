@@ -44,7 +44,6 @@ export async function run() {
     const runnerContext = Action.runnerContext();
 
     try {
-      await Docker.build(baseImage);
       await Docker.run(baseImage, {
         actionFolder,
         editorVersion,

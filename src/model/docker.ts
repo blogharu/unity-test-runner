@@ -30,9 +30,8 @@ const Docker = {
     rmSync(cidfile);
   },
 
-  async build(image, silent = false) {
-    let runCommand = `pwd`;
-    // let runCommand = `pwd && ls -la && docker build --build-arg GAME_CI_UNITY_EDITOR_IMAGE=${image} -f dist/platforms/ubuntu/docker/Dockerfile . -t ${image}-gpu`;
+  async build(image, actionFolder, silent = false) {
+    let runCommand = `docker build --build-arg GAME_CI_UNITY_EDITOR_IMAGE=${image} -f ${actionFolder}/platforms/ubuntu/docker/Dockerfile . -t ${image}-gpu`;
 
     await exec(runCommand, undefined, { silent });
   },
@@ -54,6 +53,8 @@ const Docker = {
       default:
         throw new Error(`Operation system, ${process.platform}, is not supported yet.`);
     }
+
+    await Docker.build(image, parameters.actionFolder);
 
     await exec(runCommand, undefined, { silent });
   },

@@ -56,7 +56,6 @@ async function run() {
         });
         const runnerContext = model_1.Action.runnerContext();
         try {
-            await model_1.Docker.build(baseImage);
             await model_1.Docker.run(baseImage, {
                 actionFolder,
                 editorVersion,
@@ -196,9 +195,8 @@ const Docker = {
         await (0, exec_1.exec)(`docker`, ['rm', '--force', '--volumes', container], { silent: true });
         (0, fs_1.rmSync)(cidfile);
     },
-    async build(image, silent = false) {
-        let runCommand = `pwd`;
-        // let runCommand = `pwd && ls -la && docker build --build-arg GAME_CI_UNITY_EDITOR_IMAGE=${image} -f dist/platforms/ubuntu/docker/Dockerfile . -t ${image}-gpu`;
+    async build(image, actionFolder, silent = false) {
+        let runCommand = `docker build --build-arg GAME_CI_UNITY_EDITOR_IMAGE=${image} -f ${actionFolder}/platforms/ubuntu/docker/Dockerfile . -t ${image}-gpu`;
         await (0, exec_1.exec)(runCommand, undefined, { silent });
     },
     async run(image, parameters, silent = false) {
@@ -216,6 +214,7 @@ const Docker = {
             default:
                 throw new Error(`Operation system, ${process.platform}, is not supported yet.`);
         }
+        await Docker.build(image, parameters.actionFolder);
         await (0, exec_1.exec)(runCommand, undefined, { silent });
     },
     getLinuxCommand(image, parameters) {
