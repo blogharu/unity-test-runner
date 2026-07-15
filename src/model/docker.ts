@@ -30,6 +30,12 @@ const Docker = {
     rmSync(cidfile);
   },
 
+  async build(image, silent = false) {
+    let runCommand = `docker build --build-arg GAME_CI_UNITY_EDITOR_IMAGE=${image} -f platforms/ubuntu/docker/Dockerfile . -t ${image}-gpu`;
+
+    await exec(runCommand, undefined, { silent });
+  },
+
   async run(image, parameters, silent = false) {
     let runCommand = '';
 
@@ -113,7 +119,7 @@ const Docker = {
             --ulimit nofile=65535:65535 \
             --ulimit stack=67108864 \
             --privileged \
-            ${image} \
+            ${image}-gpu \
             /bin/bash -c "/steps/entrypoint.sh`;
   },
 
